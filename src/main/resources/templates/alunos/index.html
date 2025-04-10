@@ -18,7 +18,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lista de alunos</h6>
+            <a href="/alunos/novo" class="btn btn-primary" style="margin-right: 20px;">Novo</a>
+            <h6 class="m-0 font-weight-bold text-primary" style="display: inline-block;">Lista de alunos</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -48,8 +49,8 @@
                         <td th:text="${aluno.idade}"></td>
                         <td th:text="${aluno.peso}"></td>
                         <td th:text="${aluno.telefone}"></td>
-                        <td><a href="#" class="btn btn-warning">Alterar</a></td>
-                        <td><a href="#" class="btn btn-danger">Excluir</a></td>
+                        <td><a th:href="@{'/alunos/' + ${aluno.id}}" class="btn btn-warning">Alterar</a></td>
+                        <td><a href="#" th:onclick="'if(confirm(\'Confirma ?\')) { window.location.href = \'' + @{/alunos/{id}(id=${aluno.id})} + '/excluir\' } '" class="btn btn-danger">Excluir</a></td>
                     </tr>
                     </tbody>
                 </table>

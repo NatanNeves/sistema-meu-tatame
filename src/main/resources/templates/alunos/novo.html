@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastrar Alunos</title>
+    <!-- Outros links de estilo e scripts -->
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Novos Alunos</h1>
+    <p class="mb-4">Aqui você cadastra novos alunos.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="padding: 30px; width: 400px; margin-left: 15px;">
+        <form method="POST" action="/alunos/criar" onsubmit="return confirm('Confirma ação')">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" required id="nome" name="nome" placeholder="Digite o nome do aluno" style="width: 90%;">
+            </div>
+            <div class="form-group">
+                <label for="graduacao">Graduação</label>
+                <input type="text" class="form-control" required id="graduacao" name="graduacao" placeholder="Digite a graduação do aluno" style="width: 90%;">
+            </div>
+            <div class="form-group">
+                <label for="idade">Idade</label>
+                <input type="number" class="form-control" required id="idade" name="idade" placeholder="Digite a idade do aluno" style="width: 90%;">
+            </div>
+            <div class="form-group">
+                <label for="peso">Peso</label>
+                <input type="number" class="form-control" required id="peso" name="peso" placeholder="Digite o peso do aluno" step="0.1" style="width: 90%;">
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="form-control" required id="telefone" name="telefone" placeholder="Digite o telefone do aluno" style="width: 90%;">
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+<!-- /.container-fluid -->
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>
