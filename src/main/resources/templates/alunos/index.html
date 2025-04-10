@@ -1,62 +1,64 @@
-<div th:replace="compartilhados/header">...</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Alunos</title>
+    <!-- Outros links de estilo e scripts -->
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
 <!-- Begin Page Content -->
-                <div class="container-fluid">
+<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Alunos</h1>
-                    <p class="mb-4">Aqui irá listar todos os alunos</a>.</p>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Alunos</h1>
+    <p class="mb-4">Aqui irá listar todos os alunos.</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Lista de alunos</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>graduação</th>
-                                            <th>idade</th>
-                                            <th>peso</th>
-                                            <th>telefone</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>graduação</th>
-                                            <th>idade</th>
-                                            <th>peso</th>
-                                            <th>telefone</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>natan</td>
-                                            <td>roxa</td>
-                                            <td>23</td>
-                                            <td>96</td>
-                                            <td>18988185200</td>
-                                            <td> <a href="#" class="btn btn-warning"> Alterar</td>
-                                            <td> <a href="#" class="btn btn-danger"> Excluir</td>
-                                        </tr>
-                                        <tr>
-                                            <td>ana laura</td>
-                                            <td>branca</td>
-                                            <td>21</td>
-                                            <td>58</td>
-                                            <td>119923467678</td>
-                                            <td> <a href="#" class="btn btn-warning"> Alterar</td>
-                                                <td> <a href="#" class="btn btn-danger"> Excluir</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Lista de alunos</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Graduação</th>
+                        <th>Idade</th>
+                        <th>Peso</th>
+                        <th>Telefone</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Graduação</th>
+                        <th>Idade</th>
+                        <th>Peso</th>
+                        <th>Telefone</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.graduacao}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                        <td th:text="${aluno.peso}"></td>
+                        <td th:text="${aluno.telefone}"></td>
+                        <td><a href="#" class="btn btn-warning">Alterar</a></td>
+                        <td><a href="#" class="btn btn-danger">Excluir</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- /.container-fluid -->
-<div th:replace="compartilhados/footer">...</div>
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>
