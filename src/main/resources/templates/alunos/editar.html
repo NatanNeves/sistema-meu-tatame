@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Alunos</title>
+    <!-- Outros links de estilo e scripts -->
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Editar Alunos</h1>
+    <p class="mb-4">Aqui você edita informações de alunos.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="padding: 30px; width: 800px; margin-left: 15px;">
+        <form method="POST" th:if="${aluno != null}" th:action="@{'/alunos/' + ${aluno.id} + '/atualizar'}">
+
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" th:value="${aluno.nome}" required id="nome" name="nome" placeholder="Digite o nome do aluno" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="graduacao">Graduação</label>
+                <input type="text" class="form-control" th:value="${aluno.graduacao}" required id="graduacao" name="graduacao" placeholder="Digite a graduação do aluno" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="idade">Idade</label>
+                <input type="number" class="form-control" th:value="${aluno.idade}" required id="idade" name="idade" placeholder="Digite a idade do aluno" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="peso">Peso</label>
+                <input type="number" class="form-control" th:value="${aluno.peso}" required id="peso" name="peso" placeholder="Digite o peso do aluno" step="0.1" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="form-control" th:value="${aluno.telefone}" required id="telefone" name="telefone" placeholder="Digite o telefone do aluno" style="width: 90%;">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>

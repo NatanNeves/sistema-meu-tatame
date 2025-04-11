@@ -1,5 +1,6 @@
 package com.web.meutatame.tcc.controllers;
 
+
 import com.web.meutatame.tcc.domain.Aluno;
 import com.web.meutatame.tcc.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AlunosController {
@@ -37,5 +39,26 @@ public class AlunosController {
     public String excluir(@PathVariable int id) {
         alunoRepository.deleteById(id); // Deletar um aluno pelo ID
         return "redirect:/alunos"; // Redireciona para a lista de alunos
+    }
+
+    @GetMapping("/alunos/{id}")
+    public String buscar(@PathVariable int id, Model model){
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        try{
+            model.addAttribute("aluno", aluno.get());
+        }
+        catch(Exception err){ return "redirect:/alunos"; }
+
+        return "alunos/editar";
+    }
+
+    @PostMapping("/alunos/{id}/atualizar")
+    public String atualizar(@PathVariable int id, Aluno aluno){
+        // if(!repo.exist(id)){
+        if(!alunoRepository.existsById(id)){
+            return "redirect:/alunos";
+        }
+        alunoRepository.save(aluno);
+        return "redirect:/alunos";
     }
 }
