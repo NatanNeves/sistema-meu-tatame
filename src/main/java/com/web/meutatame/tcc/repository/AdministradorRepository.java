@@ -4,6 +4,8 @@ import com.web.meutatame.tcc.domain.Administrador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface AdministradorRepository extends JpaRepository<Administrador, Integer> {
 
     @Query(value="select CASE WHEN count(1) > 0 THEN 'true' ELSE 'false' END  from administradores where id = :id", nativeQuery = true)
@@ -11,4 +13,9 @@ public interface AdministradorRepository extends JpaRepository<Administrador, In
 
     @Query(value="select * from administradores where email = :email and senha = :senha", nativeQuery = true)
     public Administrador Login(String email, String senha);
+
+    @Query(value="select CASE WHEN count(1) > 0 THEN 'true' ELSE 'false' END from administradores where email = :email", nativeQuery = true)
+    public boolean existsByEmail(String email);
+
+    Optional<Administrador> findByEmail(String email);
 }

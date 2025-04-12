@@ -20,6 +20,9 @@ public class Administrador {
     @Column(name = "senha", length = 255, nullable = false)
     private String senha;
 
+    @Transient
+    private String confirmacaoSenha;
+
     @Column(name = "equipe")
     private String equipe;
 
@@ -61,5 +64,13 @@ public class Administrador {
 
     public void setEquipe(String equipe) {
         this.equipe = equipe;
+    }
+
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 }
