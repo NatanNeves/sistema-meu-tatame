@@ -91,23 +91,23 @@
     <h2>Crie sua conta</h2>
     <form method="POST" th:action="@{/cadastro}" th:object="${administrador}">
         <label for="nome">Nome completo</label>
-        <input type="text" id="nome" th:field="*{nome}" placeholder="Digite seu nome completo">
+        <input type="text" id="nome" th:field="*{nome}" placeholder="Digite seu nome completo" required>
         <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
 
         <label for="equipe">Nome da equipe</label>
-        <input type="text" id="equipe" th:field="*{equipe}" placeholder="Digite o nome da equipe">
+        <input type="text" id="equipe" th:field="*{equipe}" placeholder="Digite o nome da equipe" required>
         <div class="text-danger" th:if="${#fields.hasErrors('equipe')}" th:errors="*{equipe}"></div>
 
         <label for="email">Email</label>
-        <input type="email" id="email" th:field="*{email}" placeholder="Digite seu email">
+        <input type="email" id="email" th:field="*{email}" placeholder="Digite seu email" required>
         <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
         <label for="senha">Senha</label>
-        <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha">
+        <input type="password" id="senha" th:field="*{senha}" placeholder="Digite sua senha" required>
         <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
 
         <label for="confirmacaoSenha">Confirmar senha</label>
-        <input type="password" id="confirmacaoSenha" th:field="*{confirmacaoSenha}" placeholder="Confirme sua senha">
+        <input type="password" id="confirmacaoSenha" th:field="*{confirmacaoSenha}" placeholder="Confirme sua senha" required>
         <div class="text-danger" th:if="${#fields.hasErrors('confirmacaoSenha')}" th:errors="*{confirmacaoSenha}"></div>
 
         <button type="submit" class="btn">Cadastrar</button>
