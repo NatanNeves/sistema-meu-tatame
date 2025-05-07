@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Turmas</title>
+    <!-- Outros links de estilo e scripts -->
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Turmas</h1>
+    <p class="mb-4">Aqui você verá os alunos separados em turmas</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Tabela para Crianças até 5 anos -->
+                <h2>Kids 1</h2>
+                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${kids1}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabela para Crianças de 6 a 8 anos -->
+                <h2>Kids 2</h2>
+                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${kids2}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabela para Crianças de 9 a 12 anos -->
+                <h2>Kids 3</h2>
+                <table class="table table-bordered" id="dataTable3" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${kids3}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabela para Adultos (13+) -->
+                <h2>Adultos</h2>
+                <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${adultos}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>
