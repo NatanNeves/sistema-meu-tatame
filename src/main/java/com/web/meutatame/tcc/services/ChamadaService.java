@@ -5,6 +5,7 @@ import com.web.meutatame.tcc.domain.Chamada;
 import com.web.meutatame.tcc.domain.Presenca;
 import com.web.meutatame.tcc.repository.AlunoRepository;
 import com.web.meutatame.tcc.repository.ChamadaRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,5 +64,19 @@ public class ChamadaService {
                 .orElseThrow(() -> new RuntimeException("Chamada não encontrada!"));
         chamadaRepository.delete(chamada);
     }
+
+    public void atualizarPresencas(Long chamadaId, HttpServletRequest request) {
+        Chamada chamada = chamadaRepository.findById(chamadaId)
+                .orElseThrow(() -> new RuntimeException("Chamada não encontrada"));
+
+        for (Presenca presenca : chamada.getPresencas()) {
+            String param = "presente_" + presenca.getAluno().getId();
+            boolean presente = request.getParameter(param) != null;
+            presenca.setPresente(presente);
+        }
+
+        chamadaRepository.save(chamada);
+    }
+
 
 }

@@ -4,6 +4,7 @@ import com.web.meutatame.tcc.domain.Chamada;
 import com.web.meutatame.tcc.dtos.TurmaDTO;
 import com.web.meutatame.tcc.services.ChamadaService;
 import com.web.meutatame.tcc.services.TurmaService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +59,12 @@ public class ChamadaController {
     public String excluirChamada(@PathVariable("id") Long id) {
         chamadaService.excluirChamada(id);
         return "redirect:/chamadas"; // Redireciona para a lista de chamadas após a exclusão
+    }
+
+    @PostMapping("/atualizar/{id}")
+    public String atualizarChamada(@PathVariable Long id, HttpServletRequest request) {
+        chamadaService.atualizarPresencas(id, request);
+        return "redirect:/chamadas/detalhes/" + id;
     }
 
 

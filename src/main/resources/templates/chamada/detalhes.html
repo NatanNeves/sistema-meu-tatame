@@ -2,33 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Detalhes da Chamada</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div th:replace="~{compartilhados/header}"></div>
 
-<div class="container-fluid">
-    <h1>Detalhes da Chamada - <span th:text="${chamada.data}"></span></h1>
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Detalhes da Chamada - <span th:text="${chamada.data}"></span></h1>
 
+    <form method="post" th:action="'/chamadas/atualizar/' + ${chamada.id}">
     <table class="table">
-        <thead>
-        <tr>
-            <th>Aluno</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="presenca : ${chamada.presencas}">
-            <td th:text="${presenca.aluno.nome}">Nome</td>
-            <td th:text="${presenca.presente ? 'Presente' : 'Faltou'}"></td>
-        </tr>
-        </tbody>
-    </table>
+            <thead>
+            <tr>
+                <th>Aluno</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="presenca : ${chamada.presencas}">
+                <td th:text="${presenca.aluno.nome}">Nome</td>
+                <td>
+                    <input type="checkbox"
+                           th:name="'presente_' + ${presenca.aluno.id}"
+                           th:checked="${presenca.presente}"
+                           disabled
+                           class="form-check-input" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-    <a href="/chamadas" class="btn btn-secondary">Voltar</a>
+        <a href="/chamadas" class="btn btn-secondary">Voltar</a>
+        <button type="button" class="btn btn-warning" id="btnEditar">Editar</button>
+        <button type="submit" class="btn btn-success d-none" id="btnSalvar">Salvar</button>
+    </form>
 </div>
 
 <div th:replace="~{compartilhados/footer}"></div>
+
+<script>
+    document.getElementById('btnEditar').addEventListener('click', function () {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => cb.disabled = false);
+
+        document.getElementById('btnSalvar').classList.remove('d-none');
+        this.classList.add('d-none');
+    });
+</script>
 
 </body>
 </html>
