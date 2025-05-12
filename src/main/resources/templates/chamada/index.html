@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chamadas</title>
+    <!-- Outros links de estilo e scripts -->
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Chamadas</h1>
+    <p class="mb-4">Aqui você verá as informações sobre Chamadas</p>
+
+    <!-- Botão para Nova Chamada -->
+    <a href="/chamadas/nova" class="btn btn-success mb-3">Nova Chamada</a>
+
+    <!-- Lista de Chamadas -->
+    <h2 class="mt-4">Chamadas Registradas</h2>
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Presenças</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="chamada : ${chamadas}"
+            th:with="presentes=${#lists.size(chamada.presencas.?[presente == true])}">
+            <td th:text="${chamada.data}"></td>
+            <td th:text="${presentes}"></td>
+            <td>
+                <a th:href="@{/chamadas/detalhes/{id}(id=${chamada.id})}" class="btn btn-info">Detalhes</a>
+                <!-- Formulário para excluir a chamada -->
+                <form th:action="@{/chamadas/excluir/{id}(id=${chamada.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- /.container-fluid -->
+
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>
