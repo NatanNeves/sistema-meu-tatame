@@ -45,4 +45,8 @@ public class TurmaService {
         turmaDTO.setAdultos(adultos);
         return turmaDTO;
     }
+
+    public long contarTotalAlunos() {
+        return alunoRepository.count();
+    }
 }
