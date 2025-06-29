@@ -19,7 +19,7 @@ public class Presenca {
     private boolean presente;
 
     @ManyToOne
-    @JoinColumn(name = "aluno_id")
+    @JoinColumn(name = "aluno_id", nullable = false)
     private Aluno aluno;
 
     @ManyToOne

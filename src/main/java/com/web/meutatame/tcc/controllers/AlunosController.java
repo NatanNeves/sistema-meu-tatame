@@ -3,8 +3,10 @@ package com.web.meutatame.tcc.controllers;
 
 import com.web.meutatame.tcc.domain.Aluno;
 import com.web.meutatame.tcc.repository.AlunoRepository;
+import com.web.meutatame.tcc.repository.PresencaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ public class AlunosController {
 
     @Autowired
     private AlunoRepository alunoRepository;
+
+    @Autowired
+    private PresencaRepository presencaRepository;
 
     @GetMapping("/alunos")
     public String index(Model model){
@@ -35,11 +40,17 @@ public class AlunosController {
          return "redirect:/alunos";
     }
 
+    @Transactional
     @GetMapping("/alunos/{id}/excluir")
     public String excluir(@PathVariable int id) {
-        alunoRepository.deleteById(id); // Deletar um aluno pelo ID
-        return "redirect:/alunos"; // Redireciona para a lista de alunos
+        if (alunoRepository.existsById(id)) {
+            presencaRepository.deleteByAlunoId(id); // deleta pelas presenças com o ID
+            alunoRepository.deleteById(id);         // deleta o aluno
+        }
+
+        return "redirect:/alunos";
     }
+
 
     @GetMapping("/alunos/{id}")
     public String buscar(@PathVariable int id, Model model){
