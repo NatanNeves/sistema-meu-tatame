@@ -47,7 +47,6 @@ public class AlunosController {
             presencaRepository.deleteByAlunoId(id); // deleta pelas presenças com o ID
             alunoRepository.deleteById(id);         // deleta o aluno
         }
-
         return "redirect:/alunos";
     }
 

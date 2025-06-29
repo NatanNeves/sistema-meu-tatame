@@ -31,5 +31,4 @@ public class Presenca {
         this.chamada = chamada;
         this.presente = presente;
     }
-
 }
