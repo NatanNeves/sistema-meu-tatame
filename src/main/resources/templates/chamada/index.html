@@ -29,7 +29,7 @@
         <tbody>
         <tr th:each="chamada : ${chamadas}"
             th:with="presentes=${#lists.size(chamada.presencas.?[presente == true])}">
-            <td th:text="${chamada.data}"></td>
+            <td th:text="${#temporals.format(chamada.data, 'dd/MM/yyyy')}"></td>
             <td th:text="${presentes}"></td>
             <td>
                 <a th:href="@{/chamadas/detalhes/{id}(id=${chamada.id})}" class="btn btn-info">Detalhes</a>

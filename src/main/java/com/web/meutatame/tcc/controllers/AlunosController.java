@@ -24,7 +24,7 @@ public class AlunosController {
 
     @GetMapping("/alunos")
     public String index(Model model){
-        List<Aluno> alunos = alunoRepository.findAll();
+        List<Aluno> alunos = alunoRepository.findAllByOrderByNomeAsc();
         model.addAttribute("alunos", alunos);
         return "alunos/index";
     }

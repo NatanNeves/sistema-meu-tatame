@@ -19,32 +19,88 @@
     <div class="card shadow mb-4" style="padding: 30px; width: 800px; margin-left: 15px;">
         <form method="POST" th:if="${aluno != null}" th:action="@{'/alunos/' + ${aluno.id} + '/atualizar'}">
 
+            <!-- Dados Pessoais -->
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" th:value="${aluno.nome}" required id="nome" name="nome" placeholder="Digite o nome do aluno" style="width: 90%;">
+                <input type="text" class="form-control" th:value="${aluno.nome}" id="nome" name="nome" placeholder="Digite o nome completo" style="width: 90%;">
             </div>
 
             <div class="form-group">
-                <label for="graduacao">Graduação</label>
-                <input type="text" class="form-control" th:value="${aluno.graduacao}" required id="graduacao" name="graduacao" placeholder="Digite a graduação do aluno" style="width: 90%;">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="dd/MM/yyyy" style="width: 90%;"
+                       th:value="${#temporals.format(aluno.dataNascimento, 'dd/MM/yyyy')}" pattern="\d{2}/\d{2}/\d{4}">
             </div>
+
+            <!-- campo idade removido -->
 
             <div class="form-group">
-                <label for="idade">Idade</label>
-                <input type="number" class="form-control" th:value="${aluno.idade}" required id="idade" name="idade" placeholder="Digite a idade do aluno" style="width: 90%;">
+                <label for="peso">Peso (kg)</label>
+                <input type="number" class="form-control" th:value="${aluno.peso}" id="peso" name="peso" step="0.1" placeholder="Ex: 72.5" style="width: 90%;">
             </div>
 
-            <div class="form-group">
-                <label for="peso">Peso</label>
-                <input type="number" class="form-control" th:value="${aluno.peso}" required id="peso" name="peso" placeholder="Digite o peso do aluno" step="0.1" style="width: 90%;">
-            </div>
-
+            <!-- Contato -->
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input type="tel" class="form-control" th:value="${aluno.telefone}" required id="telefone" name="telefone" placeholder="Digite o telefone do aluno" style="width: 90%;">
+                <input type="tel" class="form-control" th:value="${aluno.telefone}" id="telefone" name="telefone" placeholder="Digite o telefone" style="width: 90%;">
             </div>
 
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" th:value="${aluno.email}" id="email" name="email" placeholder="Digite o e-mail" style="width: 90%;">
+            </div>
+
+            <!-- Endereço -->
+            <div class="form-group">
+                <label for="enderecoRua">Rua</label>
+                <input type="text" class="form-control" th:value="${aluno.enderecoRua}" id="enderecoRua" name="enderecoRua" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="enderecoNumero">Número</label>
+                <input type="text" class="form-control" th:value="${aluno.enderecoNumero}" id="enderecoNumero" name="enderecoNumero" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="enderecoBairro">Bairro</label>
+                <input type="text" class="form-control" th:value="${aluno.enderecoBairro}" id="enderecoBairro" name="enderecoBairro" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="enderecoCidade">Cidade</label>
+                <input type="text" class="form-control" th:value="${aluno.enderecoCidade}" id="enderecoCidade" name="enderecoCidade" style="width: 90%;">
+            </div>
+
+            <!-- Graduação -->
+            <div class="form-group">
+                <label for="graduacao">Graduação</label>
+                <input type="text" class="form-control" th:value="${aluno.graduacao}" id="graduacao" name="graduacao" placeholder="Ex: Faixa azul" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="dataGraduacao">Data da Graduação</label>
+                <input type="text" class="form-control" id="dataGraduacao" name="dataGraduacao" placeholder="dd/MM/yyyy" style="width: 90%;"
+                       th:value="${#temporals.format(aluno.dataGraduacao, 'dd/MM/yyyy')}" pattern="\d{2}/\d{2}/\d{4}">
+            </div>
+
+            <div class="form-group">
+                <label for="turma">Turma</label>
+                <input type="text" class="form-control" th:value="${aluno.turma}" id="turma" name="turma" style="width: 90%;">
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <input type="text" class="form-control" th:value="${aluno.categoria}" id="categoria" name="categoria" style="width: 90%;">
+            </div>
+
+            <!-- Observações -->
+            <div class="form-group">
+                <label for="observacoes">Observações</label>
+                <textarea class="form-control" id="observacoes" name="observacoes" rows="3" style="width: 90%;"
+                          th:text="${aluno.observacoes}"></textarea>
+            </div>
+
+            <!-- Botão -->
+            <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>
     </div>
 
