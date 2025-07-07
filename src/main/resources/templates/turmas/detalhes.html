@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Detalhes da turma ' + ${turma}">Detalhes da turma</title>
+</head>
+<body>
+
+<div th:replace="~{compartilhados/header}"></div>
+
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800" th:text="'Turma: ' + ${turma.toUpperCase()}"></h1>
+
+    <div class="mb-4">
+        <strong>Dias de treino:</strong>
+        <span th:each="dia, iterStat : ${dias}">
+            <span th:text="${dia}"></span><span th:if="${!iterStat.last}">, </span>
+        </span>
+    </div>
+
+    <div class="mb-4">
+        <strong>Horário:</strong>
+        <span th:text="${horario}"></span>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="aluno : ${alunos}">
+                        <td th:text="${aluno.nome}"></td>
+                        <td th:text="${aluno.idade}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a href="/turmas" class="btn btn-secondary">Voltar para as turmas</a>
+
+</div>
+
+<div th:replace="~{compartilhados/footer}"></div>
+
+</body>
+</html>

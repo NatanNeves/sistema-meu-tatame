@@ -1,7 +1,7 @@
 package com.web.meutatame.tcc.controllers;
 
 import com.web.meutatame.tcc.services.CookieService;
-import com.web.meutatame.tcc.services.RelatorioService;
+import com.web.meutatame.tcc.services.DashService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +14,14 @@ import java.io.UnsupportedEncodingException;
 public class HomeController {
 
     @Autowired
-    private RelatorioService relatorioService;
+    private DashService dashService;
 
     @GetMapping("/")
     public String index(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
         model.addAttribute("nome", CookieService.getCookie(request, "nome"));
 
-        int totalAlunos = relatorioService.contarAlunos();
-        double lucro = relatorioService.calcularLucroMensal();
-
+        long totalAlunos = dashService.contarTotalAlunos();
         model.addAttribute("totalAlunos", totalAlunos);
-        model.addAttribute("lucro", lucro);
 
         return "home/index";
     }

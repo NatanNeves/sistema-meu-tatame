@@ -25,5 +25,5 @@ public class Chamada {
     private LocalDate data;
 
     @OneToMany(mappedBy = "chamada", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // AQUI
-    private List<Presenca> presencas = new ArrayList<>();
+    private List<Frequencia> presencas = new ArrayList<>();
 }

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "presencas")
-public class Presenca {
+@Table(name = "frequencia")
+public class Frequencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Presenca {
     @JoinColumn(name = "chamada_id")
     private Chamada chamada;
 
-    public Presenca(Aluno aluno, Chamada chamada, boolean presente) {
+    public Frequencia(Aluno aluno, Chamada chamada, boolean presente) {
         this.aluno = aluno;
         this.chamada = chamada;
         this.presente = presente;

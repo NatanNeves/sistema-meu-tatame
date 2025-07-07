@@ -34,7 +34,9 @@ public class Aluno {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataGraduacao;
 
-    private String turma;
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
     private String categoria;
 
     @Column(columnDefinition = "TEXT")
@@ -45,10 +47,9 @@ public class Aluno {
 
     public Aluno(String nome, LocalDate dataNascimento, Integer idade, Double peso, String telefone, String email,
                  String enderecoRua, String enderecoNumero, String enderecoBairro, String enderecoCidade,
-                 String graduacao, LocalDate dataGraduacao, String turma, String categoria, String observacoes) {
+                 String graduacao, LocalDate dataGraduacao, String categoria, String observacoes) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.idade = idade;
         this.peso = peso;
         this.telefone = telefone;
         this.email = email;
@@ -58,7 +59,6 @@ public class Aluno {
         this.enderecoCidade = enderecoCidade;
         this.graduacao = graduacao;
         this.dataGraduacao = dataGraduacao;
-        this.turma = turma;
         this.categoria = categoria;
         this.observacoes = observacoes;
     }
@@ -107,8 +107,8 @@ public class Aluno {
     public LocalDate getDataGraduacao() { return dataGraduacao; }
     public void setDataGraduacao(LocalDate dataGraduacao) { this.dataGraduacao = dataGraduacao; }
 
-    public String getTurma() { return turma; }
-    public void setTurma(String turma) { this.turma = turma; }
+    public Turma getTurma() { return turma; }
+    public void setTurma(Turma turma) { this.turma = turma; }
 
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }

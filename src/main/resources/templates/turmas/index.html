@@ -13,82 +13,17 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Turmas</h1>
-    <p class="mb-4">Aqui você verá os alunos separados em turmas</p>
+    <p class="mb-4">Escolha uma turma para visualizar os alunos, dias e horários.</p>
 
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <!-- Tabela para Crianças até 5 anos -->
-                <h2>Kids 1</h2>
-                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="aluno : ${kids1}">
-                        <td th:text="${aluno.nome}"></td>
-                        <td th:text="${aluno.idade}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- Tabela para Crianças de 6 a 8 anos -->
-                <h2>Kids 2</h2>
-                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="aluno : ${kids2}">
-                        <td th:text="${aluno.nome}"></td>
-                        <td th:text="${aluno.idade}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- Tabela para Crianças de 9 a 12 anos -->
-                <h2>Kids 3</h2>
-                <table class="table table-bordered" id="dataTable3" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="aluno : ${kids3}">
-                        <td th:text="${aluno.nome}"></td>
-                        <td th:text="${aluno.idade}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- Tabela para Adultos (13+) -->
-                <h2>Adultos</h2>
-                <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="aluno : ${adultos}">
-                        <td th:text="${aluno.nome}"></td>
-                        <td th:text="${aluno.idade}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-body" style="text-align: center;">
+            <a href="/turmas?grupo=kids1" class="btn btn-primary m-2">Kids 1 (até 5 anos)</a>
+            <a href="/turmas?grupo=kids2" class="btn btn-primary m-2">Kids 2 (6 a 8 anos)</a>
+            <a href="/turmas?grupo=kids3" class="btn btn-primary m-2">Kids 3 (9 a 12 anos)</a>
+            <a href="/turmas?grupo=adultos" class="btn btn-primary m-2">Adultos (13+ anos)</a>
         </div>
     </div>
+
 </div>
 <!-- /.container-fluid -->
 

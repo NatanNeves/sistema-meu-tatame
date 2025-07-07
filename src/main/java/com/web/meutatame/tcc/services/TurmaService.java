@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class TurmaService {
@@ -24,7 +27,12 @@ public class TurmaService {
         List<Aluno> adultos = new ArrayList<>();
 
         for (Aluno aluno : alunos) {
-            int idade = aluno.getIdade();
+            Integer idadeObj = aluno.getIdade();
+            if (idadeObj == null) {
+                // Ignora alunos sem idade definida
+                continue;
+            }
+            int idade = idadeObj;
 
             if (idade <= 5) {
                 kids1.add(aluno);
@@ -48,5 +56,61 @@ public class TurmaService {
 
     public long contarTotalAlunos() {
         return alunoRepository.count();
+    }
+
+    public Map<String, List<Aluno>> separarAlunosPorTurma(List<Aluno> alunos) {
+        // Usando Java Streams para agrupar por turma
+        Map<String, List<Aluno>> turmas = alunos.stream()
+                .collect(Collectors.groupingBy(aluno -> {
+                    Integer idade = aluno.getIdade();
+                    if (idade == null) return "Sem idade";
+
+                    if (idade <= 5) {
+                        return "kids1";
+                    } else if (idade <= 8) {
+                        return "kids2";
+                    } else if (idade <= 12) {
+                        return "kids3";
+                    } else {
+                        return "adultos";
+                    }
+                }));
+        return turmas;
+    }
+
+    public List<String> obterDiasDaSemanaPorTurma(String grupo) {
+        if (grupo == null) return List.of();
+
+        switch (grupo.toLowerCase()) {
+            case "kids1":
+            case "kids2":
+            case "kids3":
+                return Arrays.asList("Segunda", "Quarta", "Sexta");
+            case "adultos":
+                return Arrays.asList("Segunda", "Terça", "Quarta", "Sexta", "Sábado");
+            default:
+                return List.of();
+        }
+    }
+
+    public String obterHorarioPorTurma(String grupo) {
+        if (grupo == null) return "";
+
+        switch (grupo.toLowerCase()) {
+            case "kids1":
+            case "kids2":
+                return "18:00";
+            case "kids3":
+                return "19:00";
+            case "adultos":
+                return "20:00";  // exemplo, ajuste conforme quiser
+            default:
+                return "";
+        }
+    }
+
+    // Método para buscar todos os alunos cadastrados no banco
+    public List<Aluno> buscarTodosAlunos() {
+        return alunoRepository.findAll();
     }
 }

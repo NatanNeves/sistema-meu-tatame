@@ -1,11 +1,14 @@
 package com.web.meutatame.tcc.controllers;
 
-import com.web.meutatame.tcc.dtos.TurmaDTO;
+import com.web.meutatame.tcc.domain.Aluno;
 import com.web.meutatame.tcc.services.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class TurmaController {
@@ -14,15 +17,24 @@ public class TurmaController {
     private TurmaService turmaService;
 
     @GetMapping("/turmas")
-    public String listarTurmas(Model model) {
-        TurmaDTO turmaDTO = turmaService.listarAlunosPorIdade();
+    public String listarTurmas(@RequestParam(required = false) String grupo, Model model) {
+        if (grupo == null) {
+            // Só mostra a página com os botões (sem alunos)
+            return "turmas/index";
+        }
 
-        // Adicionando os alunos por faixa etária no modelo
-        model.addAttribute("kids1", turmaDTO.getKids1());
-        model.addAttribute("kids2", turmaDTO.getKids2());
-        model.addAttribute("kids3", turmaDTO.getKids3());
-        model.addAttribute("adultos", turmaDTO.getAdultos());
+        // Quando a turma é informada, busca os alunos e detalhes
+        var turmasMap = turmaService.separarAlunosPorTurma(turmaService.buscarTodosAlunos());
+        List<Aluno> alunosDaTurma = turmasMap.getOrDefault(grupo, List.of());
 
-        return "turmas/index";  // Vai para a página turmas.html
+        List<String> diasDaSemana = turmaService.obterDiasDaSemanaPorTurma(grupo);
+        String horario = turmaService.obterHorarioPorTurma(grupo);
+
+        model.addAttribute("alunos", alunosDaTurma);
+        model.addAttribute("dias", diasDaSemana);
+        model.addAttribute("horario", horario);
+        model.addAttribute("turma", grupo);
+
+        return "turmas/detalhes";
     }
 }

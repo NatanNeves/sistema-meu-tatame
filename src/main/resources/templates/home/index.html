@@ -10,8 +10,9 @@
 <div class="container mt-4">
     <h2 class="mb-4">Dashboard</h2>
 
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row g-4">
+        <!-- Card: Total de Alunos -->
+        <div class="col-md-6 col-lg-6">
             <div class="card shadow rounded-3">
                 <div class="card-body text-center">
                     <h5 class="card-title">Total de Alunos</h5>
@@ -19,8 +20,59 @@
                 </div>
             </div>
         </div>
+
+        <!-- Card: Próximo Feriado -->
+        <div class="col-md-6 col-lg-6">
+            <div class="card shadow rounded-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Próximo Feriado</h5>
+                    <p class="card-text display-6 fw-bold" id="proximo-feriado">Carregando...</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Script para exibir o próximo feriado -->
+<script>
+    const feriados = [
+        { data: '2025-01-01', nome: 'Confraternização Universal' },
+        { data: '2025-02-20', nome: 'Carnaval (1º dia)' },
+        { data: '2025-02-21', nome: 'Carnaval (2º dia)' },
+        { data: '2025-03-25', nome: 'Paixão de Cristo' },
+        { data: '2025-04-21', nome: 'Tiradentes' },
+        { data: '2025-05-01', nome: 'Dia do Trabalhador' },
+        { data: '2025-06-15', nome: 'Corpus Christi' },
+        { data: '2025-09-07', nome: 'Independência do Brasil' },
+        { data: '2025-10-12', nome: 'Nossa Senhora Aparecida' },
+        { data: '2025-11-02', nome: 'Finados' },
+        { data: '2025-11-15', nome: 'Proclamação da República' },
+        { data: '2025-12-25', nome: 'Natal' }
+    ];
+
+    function encontrarProximoFeriado() {
+        const hoje = new Date();
+        const proximo = feriados.find(feriado => {
+            const dataFeriado = new Date(feriado.data);
+            return dataFeriado >= hoje;
+        });
+
+        const elemento = document.getElementById('proximo-feriado');
+
+        if (proximo) {
+            const dataObj = new Date(proximo.data);
+            const dia = dataObj.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long'
+            });
+            elemento.textContent = `${dia} - ${proximo.nome}`;
+        } else {
+            elemento.textContent = "Nenhum feriado próximo";
+        }
+    }
+
+    encontrarProximoFeriado();
+</script>
 
 <div th:replace="~{compartilhados/footer}"></div>
 </body>

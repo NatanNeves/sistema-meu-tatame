@@ -2,7 +2,7 @@ package com.web.meutatame.tcc.services;
 
 import com.web.meutatame.tcc.domain.Aluno;
 import com.web.meutatame.tcc.domain.Chamada;
-import com.web.meutatame.tcc.domain.Presenca;
+import com.web.meutatame.tcc.domain.Frequencia;
 import com.web.meutatame.tcc.repository.AlunoRepository;
 import com.web.meutatame.tcc.repository.ChamadaRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,11 +38,11 @@ public class ChamadaService {
         Chamada chamada = new Chamada();
         chamada.setData(data);
 
-        List<Presenca> presencas = new ArrayList<>();
+        List<Frequencia> presencas = new ArrayList<>();
         for (Aluno aluno : alunoRepository.findAll()) {
             boolean presente = params.containsKey("presente_" + aluno.getId());
 
-            Presenca p = new Presenca();
+            Frequencia p = new Frequencia();
             p.setAluno(aluno);
             p.setPresente(presente);
             p.setChamada(chamada);
@@ -69,7 +69,7 @@ public class ChamadaService {
         Chamada chamada = chamadaRepository.findById(chamadaId)
                 .orElseThrow(() -> new RuntimeException("Chamada não encontrada"));
 
-        for (Presenca presenca : chamada.getPresencas()) {
+        for (Frequencia presenca : chamada.getPresencas()) {
             String param = "presente_" + presenca.getAluno().getId();
             boolean presente = request.getParameter(param) != null;
             presenca.setPresente(presente);
